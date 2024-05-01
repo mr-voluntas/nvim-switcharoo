@@ -72,6 +72,6 @@ end
 return telescope.register_extension({
   setup = M.setup,
   exports = {
-    nvim_switcharoo = M,
+    nvim_switcharoo = M.cd,
   },
 })
