@@ -69,9 +69,13 @@ M.cd = function()
       :find()
 end
 
+local nvim_switcharoo = function()
+  M.cd()
+end
+
 return telescope.register_extension({
   setup = M.setup,
   exports = {
-    switcharoo = M.cd,
+    nvim_switcharoo = nvim_switcharoo,
   },
 })
