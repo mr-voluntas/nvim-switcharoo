@@ -61,6 +61,7 @@ M.cd = function()
             actions.close(prompt_bufnr)
             local selection = action_state.get_selected_entry()
             -- Change directory based on the selected entry
+            vim.cmd("cd " .. selection.value)
             vim.cmd("Ex " .. selection.value)
           end)
           return true
