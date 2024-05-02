@@ -20,7 +20,7 @@ local opts = {}
 M.setup = function(user_opts)
   -- Default options
   local default_opts = {
-    dirs = {
+    directories = {
       { "Users", "/Users/" },
     },
   }
@@ -29,14 +29,14 @@ M.setup = function(user_opts)
   opts = vim.tbl_deep_extend("keep", user_opts or {}, default_opts)
 
   -- Ensure opts.dirs is initialized
-  if not opts.dirs then
-    print("Warning: opts.dirs is not initialised!")
+  if not opts.directories then
+    print("Warning: opts.directories is not initialised!")
   end
 end
 
 M.cd = function()
   -- Ensure opts.dirs is initialized
-  if not opts.dirs then
+  if not opts.directories then
     print("Error: Please run the setup function ()")
     return
   end
@@ -46,7 +46,7 @@ M.cd = function()
       .new(opts, {
         prompt_title = "Folders",
         finder = finders.new_table({
-          results = opts.dirs,
+          results = opts.directories,
           entry_maker = function(entry)
             return {
               value = entry[2],
