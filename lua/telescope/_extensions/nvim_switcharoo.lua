@@ -72,6 +72,6 @@ end
 return telescope.register_extension({
   setup = M.setup,
   exports = {
-    switcharoo = M,
+    switcharoo = M.cd,
   },
 })
