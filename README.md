@@ -1,28 +1,30 @@
 # nvim-switcharoo
 
-Fast way to switch to a predefined directory
+A fast way to switch between predefined directories.
 
-NVIM plugin: Navigate between specific folders super fast.
+The problem I wanted to fix:
 
-When user changes directory via telescope, a callback is provided to allow for a post search action to be preformed.
+- An easy way to switch between directories.
+- A predefined list of directories I can quickly flick between.
+- Open netrw after navigation, as this is my go-to file-tree.
 
-- User opens telescope.
-- Select directory from the list.
-- Users cwd is changed to the new folder.
-- Open netrw.
-- Post action. For me, I want to open telescopes find files search.
+How to add to telescope...
 
-  -------------- WORK NOTES --------------
-
-Project structure:
-
-project-name.nvim/
-├── lua/project-name/init.lua
-└── plugin/example.lua
-
-Where to put stuff:
-
-- Plugin: Will execute lua files when nvim starts.
-- Lua: Store code for the plugin (attributes and methods).
+```lua
+-- This needs adding to the telescope.setup extensions table
+        ["nvim_switcharoo"] = {
+         directories = {
+          { "Projects", "/Users/Micheal-Scott/Projects" },
+          { "Notes", "/Users/Micheal-Scott/Notes" },
+          { "Nvim", "~/.config/nvim/" },
+         },
+        },
 
 
+-- This is needed to load the extension
+   require("telescope").load_extension("nvim_switcharoo")
+
+   -- This can be added for an easy keymap (fd = find directory)
+   local switcharoo = require("telescope").extensions.nvim_switcharoo.nvim_switcharoo
+   vim.keymap.set("n", "<leader>fd", switcharoo, {})
+```
