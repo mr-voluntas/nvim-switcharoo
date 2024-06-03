@@ -18,30 +18,25 @@ local M = {}
 local opts = {}
 
 M.setup = function(user_opts)
-  -- Default options
   local default_opts = {
     directories = {
       { "Users", "/Users/" },
     },
   }
 
-  -- Merge default options with provided options
   opts = vim.tbl_deep_extend("keep", user_opts or {}, default_opts)
 
-  -- Ensure opts.dirs is initialized
   if not opts.directories then
     print("Warning: opts.directories is not initialised!")
   end
 end
 
 M.cd = function()
-  -- Ensure opts.dirs is initialized
   if not opts.directories then
     print("Error: Please run the setup function ()")
     return
   end
 
-  -- Create Telescope picker
   pickers
       .new(opts, {
         prompt_title = "Folders",
@@ -60,7 +55,6 @@ M.cd = function()
           actions.select_default:replace(function()
             actions.close(prompt_bufnr)
             local selection = action_state.get_selected_entry()
-            -- Change directory based on the selected entry
             vim.cmd("cd " .. selection.value)
             vim.cmd("Ex " .. selection.value)
           end)
